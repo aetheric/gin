@@ -1,0 +1,22 @@
+[package]
+name = "gin"
+version = "0.1.0"
+authors = [ "Peter Cummuskey <peterc@aetheric.co.nz>" ]
+description = "A git client that focuses on corporate development workflows."
+homepage = "http://aetheric.github.io/gin"
+repository = "https://github.com/aetheric/gin"
+keywords = [ "cli", "git" ]
+license = "MIT"
+build = "build.rs"
+
+[dependencies]
+clap = { version = "2", features = [ "unstable" ]}
+log4rs = "0.5.0"
+
+[dev-dependencies]
+quickcheck = "0.3"
+quickcheck_macros = "0.2"
+
+[package.metadata.release]
+sign-commit = true
+upload-doc = true

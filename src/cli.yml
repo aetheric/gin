@@ -1,0 +1,32 @@
+args:
+
+  - config:
+    short: c
+    long: config
+    value_name: FILE
+    help: Sets a custom config file
+    takes_value: true
+
+  - verbose:
+    short: v
+    multiple: true
+    help: Sets the level of verbosity
+
+subcommands:
+
+  - checkout:
+    about: Checks a copy of a repo out to a directory
+    version: 0.1
+    args:
+
+      - source:
+        help: The repository source (github, bitbucket, custom, etc).
+        takes_value: true
+        index: 1
+
+      - repo:
+        required: true
+        help: The repository to check out
+        takes_value: true
+        index: 2
+

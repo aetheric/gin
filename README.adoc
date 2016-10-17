@@ -1,0 +1,7 @@
+= Gin
+:author: Peter Cummuskey
+:email: peterc@aetheric.co.nz
+
+A git client that focuses on corporate development workflows.
+
+// https://pascalhertleif.de/artikel/good-practices-for-writing-rust-libraries/
