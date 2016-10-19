@@ -1,17 +1,21 @@
-#![feature(plugin)]
-#![plugin(quickcheck_macros)]
+/***/
 
-extern crate quickcheck;
+describe! main {
 
-fn reverse<T: Clone>(xs: &[T]) -> Vec<T> {
-	let mut rev = vec!();
-	for x in xs.iter() {
-		rev.insert(0, x.clone())
+	before_each {
+		// TODO
 	}
-	rev
-}
 
-#[quickcheck]
-fn prop(xs: Vec<u32>) -> bool {
-	xs == reverse(&reverse(&xs))
+	it "does some stuff" {
+		// TODO
+	}
+
+	after_each {
+		//TODO
+	}
+
+	bench "something" (bencher) {
+		bencher.iter(|| 2 * 2)
+	}
+
 }
