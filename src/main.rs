@@ -44,7 +44,7 @@ fn main() {
 		("checkout",  Some(sub_m)) => checkout::execute(&sub_m),
 		("service",  Some(sub_m))  => service::execute(&sub_m),
 		("branch",  Some(sub_m))   => branch::execute(&sub_m),
-		(&_, _)                    => ()
+		(&_, _)                    => println!("{}", args.usage())
 	}
 
 }
