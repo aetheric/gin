@@ -9,8 +9,8 @@ extern crate log4rs;
 #[macro_use]
 extern crate clap;
 
-use clap::App;
-use ops::checkout;
+use clap::{ App, ArgMatches, SubCommand };
+use ops::{ checkout, service };
 
 fn main() {
 
@@ -20,6 +20,8 @@ fn main() {
 			.version(crate_version!())
 			.author(crate_authors!())
 			.about(env!("CARGO_PKG_DESCRIPTION"))
+			.subcommand(ops::checkout::build_args())
+			.subcommand(ops::checkout::build_args())
 			.get_matches();
 
 	// Initialise logging from the logging config file.
@@ -31,13 +33,14 @@ fn main() {
 		1 => trace!("Upgrading log level to INFO"),
 		2 => trace!("Upgrading log level to DEBUG"),
 		3 => trace!("Upgrading log level to TRACE"),
-		_ => trace!("There are no higher log levels.")
+		_ => warn!("There are no higher log levels.")
 	}
 
 	trace!("Logging initialised. Root logger level at ??");
 
 	match matches.subcommand() {
-		"checkout" => ops::checkout::checkout()
+		"checkout" => ops::checkout::execute(args),
+		"service"  => ops::service::execute(args)
 	}
 
 }
