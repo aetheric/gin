@@ -2,6 +2,8 @@
 :author: Peter Cummuskey
 :email: peterc@aetheric.co.nz
 
+image:https://travis-ci.org/aetheric/gin.svg?branch=master["Build Status", link="https://travis-ci.org/aetheric/gin"]
+
 A git client that focuses on corporate development workflows.
 
 // https://pascalhertleif.de/artikel/good-practices-for-writing-rust-libraries/
