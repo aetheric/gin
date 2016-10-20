@@ -1,8 +1,14 @@
 /***/
 
+#![crate_name = "gin"]
+#![crate_type = "bin"]
+
 #![feature(plugin)]
 #![feature(test)]
 #![cfg_attr(test, plugin(stainless))]
+
+#[macro_use]
+mod util;
 
 #[cfg(test)]
 mod main_tests;

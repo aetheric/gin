@@ -2,6 +2,9 @@
 
 use clap::{ App, SubCommand, Arg, ArgMatches };
 
+#[macro_use]
+use util::println_stderr;
+
 pub fn build_args<'a, 'b>() -> App<'a, 'b> {
 
 	return SubCommand::with_name("branch")
@@ -15,12 +18,20 @@ pub fn build_args<'a, 'b>() -> App<'a, 'b> {
 
 		.arg(Arg::with_name("repo")
 			.help("The repository to check out")
-			.required(true)
 			.takes_value(true)
 			.index(2));
 
 }
 
 pub fn execute(args: &ArgMatches) {
-	unimplemented!();
+	match args.subcommand() {
+		(&_, _)                    => list_branches(&args)
+	}
+}
+
+fn list_branches(args: &ArgMatches) {
+	println!("Listing Branches");
+	// TODO: get list of branches, with tracking and descriptions.
+	// TODO: Print to stdout with colours (ideally fetched from .gitconfig)
+	println_stderr!("Not actually implemented!")
 }

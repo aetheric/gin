@@ -19,6 +19,7 @@ pub fn build_args<'a, 'b>() -> App<'a, 'b> {
 		.subcommand(remove::build_args())
 		.subcommand(start::build_args())
 		.subcommand(start::build_args())
+		.subcommand(status::build_args())
 		.subcommand(stop::build_args());
 
 }

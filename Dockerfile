@@ -1,4 +1,4 @@
-FROM scorpil/rust:beta
+FROM scorpil/rust:nightly
 
 RUN cargo install cargo-watch
 
