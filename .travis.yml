@@ -2,22 +2,40 @@ language: rust
 rust: nightly
 sudo: false
 
-env:
-  - TRAVIS_CARGO_NIGHTLY_FEATURE=""
+addons:
+  apt:
+    packages:
+      - libcurl4-openssl-dev
+      - libelf-dev
+      - libdw-dev
+      - binutils-dev
 
-before_script:
-  - |
-    pip install 'travis-cargo<0.2' --user &&
-    export PATH=$HOME/.local/bin:$PATH
+env:
+  global:
+    - TRAVIS_CARGO_NIGHTLY_FEATURE=""
+    - PATH=$HOME/.local/bin:$PATH
+    - secure: "l+x1f6Y/DT4/lJXO4ODSOU2enyR5IgEr+L19dSqTc+V7kEBNpvVdv++gAs1B+V5Mcx23dQNkTgk2aYKBk4p/PjCI2aKlPvW6FwIBgcJFDDA4Fp5Yu2YE90GK2NqXqzgWn1J3BnhUuIwuoEKO8JWlxsDJNblNEaA9VUi/4ZACo4sytoDU85OzqG3zNKC6AcMrTN2Od/0NDMtXt5uEvbda72m1orWwe/XQuM7xQM0dlk2H8dkOcl+nS3PwOXKwrzXAEZz5jnbSVlbUb4oLl0eGMGFFPoiPZhgDZdBEr+vTSS7J+PL6OKih9NeZdFepzPLqYiZ8FdKeJSklQuQF7uGpHXCYawS1docrjRuKER3Fm2MvyBsMeX+8MBC/dmzjkLLbOqZpF2Lf4m9kWavy2h5tt5R+uKFGNwIDlr/lAic/Or8Z159d3rNhOc4JDPpy1nfoESYfbboVa6gUz28lhWSy4jZm+wfMhIjAhmjHdlGwjVgb1FA+wL7jYbE6REw4LWtPr3F3niWf18j1Rvq+od2/5d5qfXX2YBUf2YylfOvx8RILeQ9pls0lXG+xfP4Fo4FwNHCdU1gbQEWHzLPS5MPtdwJ/tblGNMPiOfufjC3U1curkI1sLRryWz7+m2fO2BI4sjiV7za0yOGRMqCHHg8vzu9kuyQhz5wcdJXIktPx2r0="
+
+install:
+  - pip install 'travis-cargo<0.2' --user
 
 script:
-  - |
-    travis-cargo build &&
-    travis-cargo test &&
-    travis-cargo bench &&
-    travis-cargo --only stable doc
+  - travis-cargo build
+  - travis-cargo test
+  - travis-cargo bench
+  - travis-cargo doc
 
 after_success:
-  - travis-cargo --only stable doc-upload
-  - travis-cargo coveralls --no-sudo
+  - travis-cargo doc-upload
+  - travis-cargo coveralls --no-sudo --verify
+
+deploy:
+
+  - provider: releases
+    api_key:
+      secure: "a4Rteb1xY5HX+13SVB7hF/IkGT0Q7R9qZoW02+DmzEY0JqNGLlJJNS3YTQ0LJR774BBCLzrFlbLql648hTd4Jx/dpyCYd8GviQ+H7pZXYYq2lER2rTxxE5C8dXhGeByFS8ZTW/peOxS4u18H6TynMKqZZ09bKq3JNqBJvYu7H9GwZhobIAmfzwmupZ+OGavfmYPLx7t7O28ckK2GAePrgA50KCs1vC9bNJpAsyDY7kPufsoNooZ3DXRJPhCkqRQu86V4wUPJh/6PMyDf7zjWjCO1XNce0WKb5t5A5aayAYro8qWqVBKShZ/KwS2XRiLUGQL8+geS6ZIVE+Ne1jvM9Rx64emg8wKcAIwLSFWWZ5sa8u8CrJmiXtcUpAHEr1AB3rNAs8FHPWBAjdvsPvuvVKMK1HFfDrfLUzyuGyIpL4lMh8dpAfOG7yU46r6vj785J7WR30ylOV3tIjCMOmbb3+X9LLxAUywKo941aQrVegDkEbUQkLM95zqNHTC/+WNQraq7rDZVjGBZptn5VhsdGBJM6aQWOjTamGMHWI3YG8oNLxepZvope6JGUd/XJmhp0FM50GT6crs3XY31WRfpKL2Qb5FRFGdNqzNkSbq6lwVKc7bK/NlxxSdCTjo4sVBLdv2gxTaI+Y+lH4A2fHVrVXYWktc5FSMafNbdRNyUZKU="
+    file: target/debug/gin.exe
+    skip_cleanup: true
+    on:
+      tags: true
 

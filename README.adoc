@@ -3,6 +3,7 @@
 :email: peterc@aetheric.co.nz
 
 image:https://travis-ci.org/aetheric/gin.svg?branch=master["Build Status", link="https://travis-ci.org/aetheric/gin"]
+image:https://coveralls.io/repos/github/aetheric/gin/badge.svg?branch=master["Coverage Status", link="https://coveralls.io/github/aetheric/gin?branch=master"]
 
 A git client that focuses on corporate development workflows.
 
