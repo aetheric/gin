@@ -3,7 +3,8 @@
 use std::collections::HashMap;
 use ease::{ Url, Request };
 use clap::{ App, SubCommand, Arg, ArgMatches };
-use hyper::header::{ Headers, ContentType };
+use hyper::header::{ Headers, ContentType, Authorization, Basic };
+use rustc_serialize::base64::{ ToBase64, STANDARD };
 use mime;
 
 header! { (AtlassianUser, "X-AUSERNAME") => [String] }
@@ -42,10 +43,14 @@ pub fn execute(args: &ArgMatches) {
 
 	let url = Url::parse(&format!("{}/rest/api/latest/", host)).unwrap();
 	let response = Request::new(url)
+		.header(Authorization(Basic{ username: user.to_owned(), password: Some(pass.to_owned()) }))
 		.header(ContentType(mime!(Application/Json; Charset=Utf8)))
 		.header(AtlassianUser(String::from("")))
 		.header(AtlassianToken(String::from("")))
 		.param("foo", "bar")
 		.get().unwrap();
+
+	println!("{}", response.body);
+
 }
 
