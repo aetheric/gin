@@ -2,7 +2,6 @@
 
 use clap::{ App, SubCommand, Arg, ArgMatches };
 
-#[macro_use]
 use util::println_stderr;
 
 pub fn build_args<'a, 'b>() -> App<'a, 'b> {

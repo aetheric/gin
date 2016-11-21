@@ -1,4 +1,4 @@
-/***/
+//! All the crates and features, etc are defined here. Not much else.
 
 #![crate_name = "gin"]
 #![crate_type = "bin"]
@@ -24,6 +24,14 @@ extern crate log4rs;
 
 #[macro_use]
 extern crate clap;
+
+#[macro_use]
+extern crate hyper;
+
+#[macro_use]
+extern crate mime;
+
+extern crate ease;
 
 fn main() {
 

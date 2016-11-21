@@ -9,6 +9,7 @@ addons:
       - libelf-dev
       - libdw-dev
       - binutils-dev
+      - cmake
 
 env:
   global:
@@ -16,13 +17,17 @@ env:
     - PATH=$HOME/.local/bin:$PATH
     - secure: "l+x1f6Y/DT4/lJXO4ODSOU2enyR5IgEr+L19dSqTc+V7kEBNpvVdv++gAs1B+V5Mcx23dQNkTgk2aYKBk4p/PjCI2aKlPvW6FwIBgcJFDDA4Fp5Yu2YE90GK2NqXqzgWn1J3BnhUuIwuoEKO8JWlxsDJNblNEaA9VUi/4ZACo4sytoDU85OzqG3zNKC6AcMrTN2Od/0NDMtXt5uEvbda72m1orWwe/XQuM7xQM0dlk2H8dkOcl+nS3PwOXKwrzXAEZz5jnbSVlbUb4oLl0eGMGFFPoiPZhgDZdBEr+vTSS7J+PL6OKih9NeZdFepzPLqYiZ8FdKeJSklQuQF7uGpHXCYawS1docrjRuKER3Fm2MvyBsMeX+8MBC/dmzjkLLbOqZpF2Lf4m9kWavy2h5tt5R+uKFGNwIDlr/lAic/Or8Z159d3rNhOc4JDPpy1nfoESYfbboVa6gUz28lhWSy4jZm+wfMhIjAhmjHdlGwjVgb1FA+wL7jYbE6REw4LWtPr3F3niWf18j1Rvq+od2/5d5qfXX2YBUf2YylfOvx8RILeQ9pls0lXG+xfP4Fo4FwNHCdU1gbQEWHzLPS5MPtdwJ/tblGNMPiOfufjC3U1curkI1sLRryWz7+m2fO2BI4sjiV7za0yOGRMqCHHg8vzu9kuyQhz5wcdJXIktPx2r0="
 
-install:
+before_install:
   - pip install 'travis-cargo<0.2' --user
 
-script:
+install:
   - travis-cargo build
+
+script:
   - travis-cargo test
   - travis-cargo bench
+
+after_script:
   - travis-cargo doc
 
 after_success:
