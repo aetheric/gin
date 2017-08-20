@@ -1,0 +1,21 @@
+dist: trusty
+sudo: false
+
+language: haskell
+ghc:      8.2
+
+install:
+  - cabal install --only-dependencies --enable-tests
+
+script:
+  - cabal configure --enable-tests
+  - cabal build
+  - cabal test
+
+deploy:
+
+  - provider:     releases
+    file:         target/debug/gin.exe
+    skip_cleanup: true
+    on:           { tags: true }
+    api_key:      { secure: "a4Rteb1xY5HX+13SVB7hF/IkGT0Q7R9qZoW02+DmzEY0JqNGLlJJNS3YTQ0LJR774BBCLzrFlbLql648hTd4Jx/dpyCYd8GviQ+H7pZXYYq2lER2rTxxE5C8dXhGeByFS8ZTW/peOxS4u18H6TynMKqZZ09bKq3JNqBJvYu7H9GwZhobIAmfzwmupZ+OGavfmYPLx7t7O28ckK2GAePrgA50KCs1vC9bNJpAsyDY7kPufsoNooZ3DXRJPhCkqRQu86V4wUPJh/6PMyDf7zjWjCO1XNce0WKb5t5A5aayAYro8qWqVBKShZ/KwS2XRiLUGQL8+geS6ZIVE+Ne1jvM9Rx64emg8wKcAIwLSFWWZ5sa8u8CrJmiXtcUpAHEr1AB3rNAs8FHPWBAjdvsPvuvVKMK1HFfDrfLUzyuGyIpL4lMh8dpAfOG7yU46r6vj785J7WR30ylOV3tIjCMOmbb3+X9LLxAUywKo941aQrVegDkEbUQkLM95zqNHTC/+WNQraq7rDZVjGBZptn5VhsdGBJM6aQWOjTamGMHWI3YG8oNLxepZvope6JGUd/XJmhp0FM50GT6crs3XY31WRfpKL2Qb5FRFGdNqzNkSbq6lwVKc7bK/NlxxSdCTjo4sVBLdv2gxTaI+Y+lH4A2fHVrVXYWktc5FSMafNbdRNyUZKU=" }
