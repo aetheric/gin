@@ -27,6 +27,8 @@ library
   build-depends:
     base >= 4.7 && < 5,
     configurator,
+    gitlib,
+    gitlib-libgit2,
     system-filepath,
     text
 
